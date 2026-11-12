@@ -163,6 +163,21 @@ main{padding-top:24px}
  .module-info{font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){.module{animation:none}}
+
+/* Actualización de identidad: base Barlow y contraste azul/naranja. */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap');
+:root{--ink:#17202e;--muted:#374255;--back:#f6f7fa}
+body{font-family:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif;color:#141b27;background:linear-gradient(155deg,#f4f8fd,#fff9f3 72%,#f4f8ff)}
+.compact-heading h1{font-family:Barlow,"Trebuchet MS",sans-serif;font-weight:900;letter-spacing:-.05em;color:#163e8a}
+.compact-heading h1 span{background:linear-gradient(115deg,#e77d2c,#f6a34f);background-clip:text;-webkit-background-clip:text;color:transparent}
+.compact-school{color:#101b2a}.compact-place{color:#293445}
+.module.programar{--tone:#2466ba;--tone-light:#e9f1ff;--tone-dark:#1b528e}
+.module.inclusion{--tone:#e18139;--tone-light:#fff0e4;--tone-dark:#9c4f17}
+.module.evaluar{--tone:#2d75a3;--tone-light:#e8f4fa;--tone-dark:#205773}
+.module-title,.module-info,.op-text strong{color:#151d2b}
+.module-info{color:#364254}.module{border-color:#dfe5ee}
+.option-link{background:#fff;color:#142338}.option-link small{color:#4d5b6c}
+@media(max-width:740px){.compact-heading h1{letter-spacing:-.045em}}
 </style>
 </head>
 <body>
@@ -188,20 +203,20 @@ main{padding-top:24px}
        <span class="ordinal">01 / 03</span>
       </span>
       <span class="module-title">Programar</span>
-      <span class="module-info">Currículos de Educación Infantil y Educación Primaria.</span>
+      <span class="module-info">Concreción curricular de Infantil y Primaria.</span>
       <span class="module-bottom"><span class="module-action-text">Ver currículos</span><span class="chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></span>
      </button>
      <div class="drawer" id="drawer-programar" inert>
       <div class="drawer-inner"><div class="drawer-content">
        <span class="drawer-label">Elige una etapa</span>
-       <a class="option-link" href="https://rafgim2.github.io/Cinfantil" target="_blank" rel="noopener noreferrer" aria-label="Currículo de Infantil, abrir en otra pestaña">
+       <a class="option-link" href="https://rafgim2.github.io/Cinfantil" target="_blank" rel="noopener noreferrer" aria-label="Concreción curricular · Infantil, abrir en otra pestaña">
         <span class="op-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.1"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M7 7 5 5m12 2 2-2"/></svg></span>
-        <span class="op-text"><strong>Currículo de Infantil</strong><small>Educación Infantil</small></span>
+        <span class="op-text"><strong>Concreción curricular · Infantil</strong><small>Educación Infantil</small></span>
         <svg class="op-arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
        </a>
-       <a class="option-link" href="https://rafgim2.github.io/Cprimaria" target="_blank" rel="noopener noreferrer" aria-label="Currículo de Primaria, abrir en otra pestaña">
+       <a class="option-link" href="https://rafgim2.github.io/Cprimaria" target="_blank" rel="noopener noreferrer" aria-label="Concreción curricular · Primaria, abrir en otra pestaña">
         <span class="op-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 9 9-5 9 5-9 5-9-5Zm4 3v5c3 3 7 3 10 0v-5M21 10v7"/></svg></span>
-        <span class="op-text"><strong>Currículo de Primaria</strong><small>Educación Primaria</small></span>
+        <span class="op-text"><strong>Concreción curricular · Primaria</strong><small>Educación Primaria</small></span>
         <svg class="op-arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
        </a>
       </div></div>
