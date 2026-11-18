@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173657">
+<title>ProgramApp · Situaciones de aprendizaje · Carmen APP</title>
+<style>
+:root{--navy:#173657;--blue:#2466ba;--orange:#db8249;--ink:#19263a;--muted:#596b82;--line:#dce5f0;--pale:#f4f7fb;--green:#087a6d;--red:#ad3947}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(140deg,#f1f7fe,#fbfbff 52%,#fff9f3);color:var(--ink);font:15px/1.5 "Barlow",system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #f5ab75;outline-offset:2px}a{color:var(--blue)}
+.header{background:linear-gradient(120deg,#173657,#225183);color:#fff;border-top:5px solid var(--orange)}
+.header-inner{max-width:1220px;margin:auto;padding:19px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.header a{color:#e0efff;text-decoration:none;font-weight:700}.header h1{margin:4px 0 0;font-size:clamp(27px,3.5vw,38px);letter-spacing:-.04em;line-height:1.15}.header h1 span{color:#ffc18d}
+.header p{margin:6px 0 0;color:#c8deed;font-size:13px}.save-indicator{font-size:12px;color:#daf7ed;padding:7px 11px;border:1px solid #ffffff45;border-radius:40px;white-space:nowrap}
+main{max-width:1220px;margin:23px auto 90px;padding:0 24px}
+.intro{padding:5px 3px 15px;color:#53647a;max-width:930px}.intro strong{color:#203955}
+.card{background:#fff;border:1px solid var(--line);border-radius:19px;box-shadow:0 12px 40px #223b5810;margin:0 0 20px;padding:24px}
+.card-head{display:flex;align-items:flex-start;gap:13px;margin-bottom:18px}.step{display:grid;place-items:center;flex:none;width:36px;height:36px;background:#e9f2ff;color:#245d9a;font-size:14px;font-weight:800;border-radius:11px}
+.card h2{margin:0;font-size:21px;line-height:1.2;letter-spacing:-.025em}.card-head p{margin:5px 0 0;font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.field{min-width:0}.field.wide{grid-column:span 2}.field.full{grid-column:1/-1}
+label.field-label{display:block;font-size:13px;font-weight:750;margin:0 0 5px;color:#293f5b}
+input[type=text],input[type=search],select,textarea{width:100%;border:1px solid #b9c8da;border-radius:9px;color:#1c2b41;background:#fff;padding:10px 11px;min-height:43px}
+textarea{min-height:90px;resize:vertical;line-height:1.57}input::placeholder,textarea::placeholder{color:#8795a7}
+.help{font-size:12px;color:var(--muted);margin:6px 0 0}.hint{background:#f2f7ff;border:1px solid #d9e8fb;border-radius:11px;padding:10px 12px;font-size:12px;color:#425d7d}
+.areas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.area-choice{display:flex;gap:10px;align-items:center;padding:11px 12px;min-height:58px;border:1px solid #dce5f0;border-radius:11px;background:#fcfdff;cursor:pointer;transition:.15s}
+.area-choice:hover{border-color:#83a8d4}.area-choice:has(input:checked){background:#eaf4ff;border-color:#3d81c3}.area-choice input{width:19px;height:19px;accent-color:var(--blue);flex:none}.area-choice span{font-weight:700;font-size:13px;line-height:1.3}
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:17px}.btn{border:1px solid #d1dce8;border-radius:10px;background:#fff;color:#1f3a57;font-weight:750;padding:10px 14px;min-height:43px}.btn:hover{background:#f3f8ff}
+.btn-primary{background:#2366af;border-color:#2366af;color:white}.btn-primary:hover{background:#174f90}.btn-orange{background:#cb6d2b;border-color:#cb6d2b;color:white}.btn-orange:hover{background:#b35b1c}
+.btn-danger{color:var(--red);border-color:#edcbd2}.btn-small{font-size:12px;min-height:32px;padding:6px 10px}
+.filters{display:grid;grid-template-columns:1fr 1.1fr 1.7fr;gap:13px;margin:0 0 15px}
+.catalog{display:grid;gap:9px}.catalog-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;border:1px solid #e0e8f1;border-radius:12px;padding:13px;background:#fbfdff}
+.catalog-item.selected{background:#e9f7f2;border-color:#a6d7c6}.catalog-item strong{display:block;font-size:12px;color:#1c608e;margin-bottom:4px}
+.catalog-item p{white-space:pre-line;margin:0;max-height:110px;overflow:auto;font-size:13px;line-height:1.5}
+.catalog-item details{margin-top:6px;font-size:12px;color:#65778a}.catalog-item details summary{cursor:pointer}
+.catalog-item .source{font-size:11px;color:#6f7d8d;margin-top:6px}.counter{margin:8px 0 12px;color:#68798d;font-size:12px}
+.empty{border:1px dashed #b9cde1;background:#f7faff;border-radius:11px;padding:20px;text-align:center;color:#65768c;font-size:13px}
+.kind-group{padding:13px 0 16px;border-bottom:1px solid #e8edf4}.kind-group:last-child{border:0}.kind-group h3{font-size:16px;margin:0 0 9px;color:#24496c}
+.area-selected{margin:10px 0;padding:11px 12px;background:#f5f9fe;border:1px solid #e0eaf5;border-radius:11px}.area-selected h4{font-size:13px;margin:0 0 8px;color:#31587e}
+.selected-item{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;border-top:1px solid #e4ecf5;padding:9px 0}.selected-item:first-of-type{border-top:0}.selected-item p{white-space:pre-line;margin:0;font-size:12px;line-height:1.5;max-height:78px;overflow:auto;flex:1}
+.mode-panel{padding:16px 0;border-bottom:1px solid #e7edf4}.mode-panel:first-child{padding-top:0}.mode-panel:last-child{border:0;padding-bottom:0}.mode-top{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:9px}
+.mode-top label{font-weight:800;color:#254365}.mode-top select{width:auto;min-width:205px;min-height:37px;font-size:12px;padding:6px 10px}.mode-panel textarea{font-size:13px;min-height:100px}.mode-panel textarea:disabled{background:#f5f7fa;color:#64768a;cursor:default}
+.task{border:1px solid #dfe8f2;border-radius:12px;margin-bottom:12px;padding:13px;background:#fcfdff}
+.task-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.task-head strong{font-size:14px;color:#2a557a}
+.task-content{display:grid;grid-template-columns:210px minmax(0,1fr);gap:12px}.task textarea{min-height:83px;font-size:13px}
+.actions{position:sticky;bottom:0;z-index:10;padding:15px 19px;background:#fffefcf2;backdrop-filter:blur(13px);border:1px solid #dbe5ef;border-radius:16px;box-shadow:0 8px 28px #172c471d;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.action-buttons{display:flex;flex-wrap:wrap;gap:8px}.actions p{font-size:12px;color:#607086;margin:0;max-width:380px}
+.source-note{margin:0 0 20px;background:#fff;border-left:4px solid #2c86b7;padding:13px 16px;font-size:12px;color:#637286;border-radius:9px}
+.footer{font-size:12px;color:#74859a;text-align:center;padding:28px}
+#printPaper{display:none}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.areas{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){main{padding:0 12px;margin-top:15px}.header-inner{padding:16px}.header h1{font-size:28px}.save-indicator{display:none}.card{padding:16px;border-radius:14px}.grid,.filters,.areas,.task-content{grid-template-columns:1fr}.field.wide{grid-column:1}.catalog-item{grid-template-columns:1fr}.catalog-item button{justify-self:start}.actions{flex-direction:column;align-items:stretch}.actions p{max-width:none}.action-buttons{display:grid;grid-template-columns:1fr 1fr}.btn{padding:9px}.mode-top select{width:100%}}
+@page{size:A4;margin:14mm 13mm}
+@media print{html,body{background:white!important;color:#152237!important;font:10pt/1.35 Arial,sans-serif!important}#screenApp{display:none!important}#printPaper{display:block!important;width:auto;margin:0;padding:0}.pdf-title{font-size:20pt;color:#14375d;font-weight:800;margin:0 0 6px}.pdf-sub{font-size:9pt;color:#5c6978;margin:0 0 16px}.pdf-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-bottom:13px}.pdf-meta .cell{border:1px solid #cad6e3;padding:6px 8px;min-width:0;overflow-wrap:anywhere;break-inside:avoid}.pdf-meta b{display:block;font-size:8pt;color:#406084;margin-bottom:2px}.pdf-section{margin:16px 0 0;break-inside:auto}.pdf-section h2{background:#e9f1f8;padding:7px 9px;font-size:11pt;color:#183e63;margin:0 0 8px;break-after:avoid}.pdf-section h3{font-size:10pt;margin:10px 0 5px;color:#254c70;break-after:avoid}.pdf-section .value{white-space:pre-line;overflow-wrap:anywhere;padding:2px 6px;font-size:9.5pt}.pdf-entry{padding:5px 7px;border-bottom:1px solid #e2e7ec;break-inside:avoid;overflow-wrap:anywhere}.pdf-entry .pdf-text{white-space:pre-line}.pdf-entry small{display:block;color:#53677d;margin-top:4px;font-size:8.3pt}.pdf-task{border-bottom:1px solid #dfe7ee;padding:8px;break-inside:avoid}.pdf-task b{display:block;color:#16456e;margin-bottom:3px}.pdf-empty{color:#808fa1;font-style:italic}.pdf-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.pdf-cols>div{border:1px solid #d8e0e9;padding:7px;white-space:pre-line;overflow-wrap:anywhere;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div id="screenApp">
+<header class="header"><div class="header-inner"><div><a href="../">← Carmen APP</a><h1>Program<span>App</span></h1><p>Generador de situacions d'aprenentatge · Infantil i Primària</p></div><span id="saveIndicator" class="save-indicator" aria-live="polite">Guardado automático</span></div></header>
+<main>
+<p class="intro">Diseña una <strong>situación de aprendizaje interdisciplinar</strong> con el currículo que ya utilizas en Carmen APP. Selecciona varias áreas, elige competencias, criterios y saberes, personaliza la plantilla y genera un PDF.</p>
+
+<section class="card">
+<div class="card-head"><span class="step">01</span><div><h2>Datos de la situación de aprendizaje</h2><p>Etapa, curso y datos generales de la plantilla.</p></div></div>
+<div class="grid">
+<div class="field"><label class="field-label" for="stage">Etapa</label><select id="stage"><option value="primaria">Educación Primaria</option><option value="infantil">Educación Infantil</option></select></div>
+<div class="field"><label class="field-label" for="grade">Curso / edad</label><select id="grade"></select></div>
+<div class="field"><label class="field-label" for="saNumber">N.º de situación</label><input id="saNumber" type="text" placeholder="1"></div>
+<div class="field wide"><label class="field-label" for="saTitle">Nombre de la situación de aprendizaje</label><input id="saTitle" type="text" placeholder="Escribe un título"></div>
+<div class="field"><label class="field-label" for="duration">Duración</label><input id="duration" type="text" placeholder="Ej. 6 setmanes"></div>
+<div class="field wide"><label class="field-label" for="challenge">Pregunta desafío / reto</label><input id="challenge" type="text" placeholder="¿Qué queremos descubrir o conseguir?"></div>
+<div class="field"><label class="field-label" for="ods">ODS</label><input id="ods" type="text" placeholder="Ej. 3, 4, 11"></div>
+</div></section>
+
+<section class="card">
+<div class="card-head"><span class="step">02</span><div><h2>Áreas que intervienen</h2><p>Puedes marcar varias. El área quedará identificada en todos los elementos y en el PDF.</p></div></div>
+<div id="areaList" class="areas" aria-label="Áreas curriculares"></div>
+<p class="help">Al desmarcar un área, se retiran también de la situación los elementos curriculares seleccionados de esa área.</p>
+</section>
+
+<section class="card">
+<div class="card-head"><span class="step">03</span><div><h2>Seleccionar currículo</h2><p>Textos tomados de las aplicaciones de Concreción curricular de Infantil y Primaria de Carmen APP.</p></div></div>
+<div class="filters">
+<div class="field"><label class="field-label" for="kind">Elemento curricular</label><select id="kind"><option value="competencias">Competencias específicas</option><option value="criterios">Criterios de evaluación</option><option value="saberes">Saberes básicos</option></select></div>
+<div class="field"><label class="field-label" for="areaFilter">Filtrar por área</label><select id="areaFilter"></select></div>
+<div class="field"><label class="field-label" for="search">Buscar por texto o código</label><input id="search" type="search" placeholder="Ej. 4.1, numeración, paisaje…"></div>
+</div>
+<div id="catalogInfo" class="counter" role="status"></div>
+<div id="catalog" class="catalog"></div>
+<div class="toolbar"><button type="button" class="btn" id="showMore" hidden>Mostrar más resultados</button></div>
+</section>
+
+<section class="card">
+<div class="card-head"><span class="step">04</span><div><h2>Currículo seleccionado</h2><p>Puedes quitar cada elemento individualmente, sin modificar los demás.</p></div></div>
+<div id="selectedSummary"></div>
+</section>
+
+<section class="card">
+<div class="card-head"><span class="step">05</span><div><h2>Metodología, DUA, inclusión y evaluación</h2><p>En cada apartado elige conservar el texto de la plantilla o escribir tu propia versión.</p></div></div>
+<div id="textControls"></div>
+</section>
+
+<section class="card">
+<div class="card-head"><span class="step">06</span><div><h2>Itinerari de tasques</h2><p>Empieza con tres tareas; añade, elimina y reordena las que necesites.</p></div></div>
+<div id="tasks"></div><button type="button" class="btn btn-primary" id="addTask">+ Añadir tarea</button>
+</section>
+
+<section class="card">
+<div class="card-head"><span class="step">07</span><div><h2>Espacios, recursos y aula transformadora</h2><p>Los textos predeterminados proceden de la plantilla Excel.</p></div></div>
+<div id="extraControls"></div>
+</section>
+<p class="source-note"><strong>Fuente curricular:</strong> <a href="https://rafgim2.github.io/Cprimaria/" target="_blank" rel="noopener">Concreción curricular de Primaria</a> y <a href="https://rafgim2.github.io/Cinfantil/" target="_blank" rel="noopener">Concreción curricular de Infantil</a>. Los textos se conservan tal como aparecen en las aplicaciones originales. En Infantil algunas competencias figuran solo como referencias numéricas porque así constan en el archivo de origen.</p>
+<div class="actions"><p>Los cambios se guardan automáticamente <strong>en este navegador</strong>. Puedes exportar tu trabajo para continuarlo en otro dispositivo.</p><div class="action-buttons"><button type="button" class="btn" id="exportDraft">Guardar proyecto</button><button type="button" class="btn" id="importDraft">Abrir proyecto</button><button type="button" class="btn btn-danger" id="reset">Nueva SA</button><button type="button" class="btn btn-orange" id="printPdf">Generar PDF</button></div><input type="file" id="fileDraft" accept=".json,application/json" hidden></div>
+<p class="footer">ProgramApp · Carmen APP · Colegio Nuestra Señora del Carmen — Barrio del Cristo</p>
+</main></div>
+<div id="printPaper"></div>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+var KEY="carmen-programapp-v1";
+var KINDS=["competencias","criterios","saberes"];
+var LABELS={competencias:"Competències específiques",criterios:"Criteris d'avaluació",saberes:"Sabers bàsics"};
+var FASES=["CONNECTA","RECERCA","REFLEXIONA","CREA","EXPOSA"];
+var DEFAULTS={
+metodologia:"Es desenvolupa una varietat de metodologies adaptades a la naturalesa de l'activitat i les particularitats del grup, sempre des d'un enfocament competencial i integrador. S'alternen els grups cooperatius, el treball individual i la classe magistral, amb l'objectiu d'assegurar una formació i un creixement globalitzat. Sempre trabllant des d'un enfocament actiu. S'empra el llibre de text com a font de recursos i de consulta teòrica.",
+dua:"La SA es construeix des de la mirada de l'accessibilitat total. Es garanteix la participació de cadascun dels individus que formen el grup-classe mitjançant activitats amb rols variats, i amb materials adaptats a les particularitats de cadascun. S'utilitza la curiositat i la satisfacció per entendre el seu voltant com a motor de l'aprenentatge.",
+inclusio:"Es tenen en compte els nivells de resposta educativa per a la inclusió en el disseny de la SA, atenent les necessitats individuals de l'alumnat i en coordinació amb els professionals de suport que hi intervenen.",
+instrument1:"Avaluació interpars.",
+instrument2:"Produccions avaluables, autoavaluació.",
+instrument3:"Rúbrica, quadern d'avaluació i proves escrites.",
+espais:"Aula.",
+recursos:"10 libros de El Principito. Libretas. Estuches completos para el mural.",
+tipologia:"Les activitats es realitzaran seguint cinc fases:\n1. CONNECTA: vincular els coneixements i la realitat de l’alumnat amb les competències i els sabers per a aconseguir un centre d’interés.\n2. RECERCA: Obtindre informació sobre el centre d’interés de forma multimodal.\n3. REFLEXIONA: Prendre consciència de la informació obtinguda i la seua relació amb l’entorn pròxim.\n4. CREA: Produir materials, recursos o elements que servisquen per a afiançar els coneixements trobats i aprehendre els vincles entre el dia a dia i el currículum.\n5. EXPOSA: Comunicar als altres el coneixement i les experiències acumulats en el procés d’aprenentatge."
+};
+var CONFIG=[
+{key:"metodologia",label:"Metodologia",parent:"textControls"},
+{key:"dua",label:"DUA · Disseny Universal per a l'Aprenentatge",parent:"textControls"},
+{key:"inclusio",label:"Inclusió",parent:"textControls"},
+{key:"instrument1",label:"Instrument 1 · Avaluació entre iguals",parent:"textControls"},
+{key:"instrument2",label:"Instrument 2 · Produccions i autoavaluació",parent:"textControls"},
+{key:"instrument3",label:"Instrument 3 · Rúbriques i proves",parent:"textControls"},
+{key:"espais",label:"Espais",parent:"extraControls"},
+{key:"recursos",label:"Recursos",parent:"extraControls"},
+{key:"tipologia",label:"Tipologia d'activitats d'aula transformadora",parent:"extraControls"}
+];
+function newTask(){return {fase:"",descripcion:""}}
+function blank(){return {stage:"primaria",grade:"6",saNumber:"1",title:"",duration:"",challenge:"",ods:"",areas:[],selected:{competencias:[],criterios:[],saberes:[]},modes:{},custom:{},tasks:[newTask(),newTask(),newTask()]}}
+var state=blank(),data={primaria:null,infantil:null},limit=35,saveTimer;
+function make(tag,cls,txt){var el=document.createElement(tag);if(cls)el.className=cls;if(txt!==undefined)el.textContent=String(txt);return el}
+function notify(txt){$("saveIndicator").textContent=txt}
+function persist(){clearTimeout(saveTimer);saveTimer=setTimeout(function(){try{localStorage.setItem(KEY,JSON.stringify(state));notify("Guardado automáticamente ✓")}catch(err){notify("No se pudo guardar")} },180)}
+function readStored(){try{var p=JSON.parse(localStorage.getItem(KEY));if(p && (p.stage==="primaria"||p.stage==="infantil")) state=normalizeDraft(p)}catch(err){}}
+function normalizeDraft(p){var fresh=blank();fresh.stage=p.stage==="infantil"?"infantil":"primaria";fresh.grade=String(p.grade|| (fresh.stage==="primaria"?"6":"5"));if(!((fresh.stage==="primaria"?["1","2","3","4","5","6"]:["3","4","5"]).includes(fresh.grade)))fresh.grade=fresh.stage==="primaria"?"6":"5";
+["saNumber","title","duration","challenge","ods"].forEach(function(k){fresh[k]=String(p[k]||"")});
+fresh.areas=Array.isArray(p.areas)?p.areas.filter(function(x){return typeof x==="string"}):[];
+KINDS.forEach(function(k){fresh.selected[k]=Array.isArray(p.selected&&p.selected[k])?p.selected[k].filter(function(x){return typeof x==="string"}):[]});
+CONFIG.forEach(function(c){fresh.modes[c.key]=p.modes&&p.modes[c.key]==="custom"?"custom":"default";fresh.custom[c.key]=String(p.custom&&p.custom[c.key]||"")});
+fresh.tasks=Array.isArray(p.tasks)?p.tasks.slice(0,100).map(function(t){return {fase:FASES.includes(t.fase)?t.fase:"",descripcion:String(t.descripcion||"")}}):[newTask(),newTask(),newTask()];
+return fresh}
+function currentDB(){return data[state.stage]}
+function nameArea(a){return currentDB().areas[a]||("Àrea "+a)}
+function graded(e){return String(e.grade)===String(state.grade)}
+function escapeNorm(t){return String(t||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
+function keyOf(e){return e.id}
+function getEntry(id){return (currentDB().entries||[]).find(function(e){return e.id===id})}
+function setFieldValue(){ $("stage").value=state.stage; buildGrade(); $("grade").value=state.grade;
+var names={saNumber:"saNumber",saTitle:"title",duration:"duration",challenge:"challenge",ods:"ods"};
+Object.keys(names).forEach(function(id){$(id).value=state[names[id]]});
+}
+function buildGrade(){$("grade").replaceChildren();var grades=state.stage==="primaria"?["1","2","3","4","5","6"]:["3","4","5"];grades.forEach(function(g){var o=make("option","",state.stage==="primaria"?g+"º de Primaria":g+" años");o.value=g;$("grade").append(o)});}
+function sanitizeSelected(){var db=currentDB();var validAreas=new Set(Object.keys(db.areas));state.areas=state.areas.filter(function(a,i){return validAreas.has(a)&&state.areas.indexOf(a)===i});KINDS.forEach(function(k){var seen=new Set();state.selected[k]=state.selected[k].filter(function(id){var e=db.entries.find(function(entry){return entry.id===id});if(!e||e.kind!==k||!graded(e)||!state.areas.includes(e.area)||seen.has(id))return false;seen.add(id);return true})})}
+function buildAreas(){var root=$("areaList");root.replaceChildren();currentDB().area_order.forEach(function(area){var label=make("label","area-choice"),input=make("input");input.type="checkbox";input.value=area;input.checked=state.areas.includes(area);input.setAttribute("aria-label",nameArea(area));input.addEventListener("change",function(){if(input.checked){if(!state.areas.includes(area))state.areas.push(area)}else{state.areas=state.areas.filter(function(x){return x!==area});KINDS.forEach(function(k){state.selected[k]=state.selected[k].filter(function(id){var e=getEntry(id);return e&&e.area!==area})})}limit=35;buildAreaFilter();renderCatalog();renderSelected();persist()});
+label.append(input,make("span","",nameArea(area)));root.append(label)})}
+function buildAreaFilter(){var sel=$("areaFilter"),before=sel.value;sel.replaceChildren();var opt=make("option","","Todas las áreas elegidas");opt.value="";sel.append(opt);currentDB().area_order.filter(function(a){return state.areas.includes(a)}).forEach(function(a){var op=make("option","",nameArea(a));op.value=a;sel.append(op)});sel.value=state.areas.includes(before)?before:""}
+function catalogEntries(){var db=currentDB(),kind=$("kind").value,area=$("areaFilter").value,q=escapeNorm($("search").value);
+if(!state.areas.length)return [];
+var list=db.entries.filter(function(e){if(!graded(e)||e.kind!==kind||!state.areas.includes(e.area)||(area&&e.area!==area))return false;return !q||escapeNorm([e.text,e.title,e.detail,e.scope,db.areas[e.area]].join(" ")).includes(q)});
+return list.sort(function(a,b){return db.area_order.indexOf(a.area)-db.area_order.indexOf(b.area)})}
+function renderCatalog(){var db=currentDB(),root=$("catalog");root.replaceChildren();
+if(!db){root.append(make("div","empty","Cargando currículo…"));return}
+if(!state.areas.length){$("catalogInfo").textContent="";root.append(make("div","empty","Marca una o varias áreas en el apartado 02 para empezar."));$("showMore").hidden=true;return}
+var list=catalogEntries(),kind=$("kind").value;
+$("catalogInfo").textContent=list.length+" elementos disponibles · "+(state.stage==="primaria"?state.grade+"º de Primaria":state.grade+" años")+" · "+LABELS[kind];
+if(!list.length)root.append(make("div","empty","No hay elementos para esta combinación de curso, áreas y búsqueda."));
+list.slice(0,limit).forEach(function(e){var chosen=state.selected[kind].includes(keyOf(e)),article=make("article","catalog-item"+(chosen?" selected":"")),body=make("div"),area=make("strong","",nameArea(e.area)+(e.title?" · "+e.title:""));
+body.append(area,make("p","",e.text||""));
+if(e.detail){var d=make("details"),s=make("summary","","Ver concreción por ciclo"),content=make("p","",e.detail);content.style.maxHeight="none";d.append(s,content);body.append(d)}
+if(e.warning){var warn=make("div","source",e.warning);body.append(warn)}
+var btn=make("button","btn btn-small"+(chosen?" btn-primary":""),chosen?"✓ Seleccionado":"+ Añadir");btn.type="button";btn.addEventListener("click",function(){if(chosen){state.selected[kind]=state.selected[kind].filter(function(id){return id!==e.id})}else{state.selected[kind].push(e.id)}renderCatalog();renderSelected();persist()});
+article.append(body,btn);root.append(article)});
+$("showMore").hidden=list.length<=limit;$("showMore").textContent="Mostrar más ("+Math.min(35,list.length-limit)+" de "+(list.length-limit)+" restantes)"}
+function renderSelected(){var root=$("selectedSummary");root.replaceChildren();var count=KINDS.reduce(function(n,k){return n+state.selected[k].length},0);if(!count){root.append(make("div","empty","Todavía no has elegido competencias, criterios ni saberes."));return}
+KINDS.forEach(function(kind){if(!state.selected[kind].length)return;var section=make("section","kind-group"),h=make("h3","",LABELS[kind]+" · "+state.selected[kind].length);section.append(h);
+currentDB().area_order.forEach(function(area){var list=state.selected[kind].map(getEntry).filter(function(e){return e&&e.area===area});if(!list.length)return;
+var box=make("div","area-selected");box.append(make("h4","",nameArea(area)+" · "+list.length));
+list.forEach(function(e){var row=make("div","selected-item");row.append(make("p","",(e.title?e.title+" · ":"")+e.text));
+var remove=make("button","btn btn-small btn-danger","Quitar");remove.type="button";remove.setAttribute("aria-label","Quitar "+LABELS[kind]+" de "+nameArea(area));remove.addEventListener("click",function(){state.selected[kind]=state.selected[kind].filter(function(id){return id!==e.id});renderCatalog();renderSelected();persist()});row.append(remove);box.append(row)});
+section.append(box)});root.append(section)})}
+function currentText(key){return state.modes[key]==="custom"?state.custom[key]:DEFAULTS[key]}
+function buildTextControls(){CONFIG.forEach(function(c){var panel=make("div","mode-panel"),top=make("div","mode-top"),label=make("label","",c.label),mode=make("select"),ta=make("textarea");
+label.htmlFor="text-"+c.key;mode.setAttribute("aria-label","Modo de "+c.label);
+[["default","Texto de la plantilla"],["custom","Personalizar"]].forEach(function(pair){var opt=make("option","",pair[1]);opt.value=pair[0];mode.append(opt)});
+mode.value=state.modes[c.key]||"default";ta.id="text-"+c.key;ta.value=currentText(c.key);ta.disabled=mode.value!=="custom";
+mode.addEventListener("change",function(){state.modes[c.key]=mode.value;if(mode.value==="custom"&&!state.custom[c.key])state.custom[c.key]=DEFAULTS[c.key];ta.value=currentText(c.key);ta.disabled=mode.value!=="custom";persist()});
+ta.addEventListener("input",function(){state.custom[c.key]=ta.value;persist()});
+top.append(label,mode);panel.append(top,ta);$(c.parent).append(panel)})}
+function renderTasks(){var root=$("tasks");root.replaceChildren();if(!state.tasks.length)root.append(make("div","empty","Todavía no hay tareas. Pulsa «Añadir tarea»."));
+state.tasks.forEach(function(t,index){var card=make("div","task"),head=make("div","task-head"),strong=make("strong","","Tarea "+(index+1)),actions=make("div");
+[["↑","Subir"],["↓","Bajar"],["×","Eliminar"]].forEach(function(pair,i){var b=make("button","btn btn-small"+(i===2?" btn-danger":""),pair[0]);b.type="button";b.title=pair[1];b.setAttribute("aria-label",pair[1]+" tarea "+(index+1));b.disabled=(i===0&&index===0)||(i===1&&index===state.tasks.length-1);b.addEventListener("click",function(){if(i===2){state.tasks.splice(index,1)}else{var other=index+(i===0?-1:1),tmp=state.tasks[other];state.tasks[other]=state.tasks[index];state.tasks[index]=tmp}renderTasks();persist()});actions.append(b)});head.append(strong,actions);
+var row=make("div","task-content"),left=make("div","field"),right=make("div","field"),la=make("label","field-label","Fase"),lb=make("label","field-label","Descripción de la actividad"),select=make("select"),ta=make("textarea");la.htmlFor="task-fase-"+index;lb.htmlFor="task-desc-"+index;select.id="task-fase-"+index;ta.id="task-desc-"+index;
+var empty=make("option","","Sin fase asignada");empty.value="";select.append(empty);
+FASES.forEach(function(f){var o=make("option","",f);o.value=f;select.append(o)});select.value=t.fase||"";ta.value=t.descripcion||"";ta.placeholder="Describe qué hará el alumnado…";
+select.addEventListener("change",function(){t.fase=select.value;persist()});ta.addEventListener("input",function(){t.descripcion=ta.value;persist()});
+left.append(la,select);right.append(lb,ta);row.append(left,right);card.append(head,row);root.append(card)})}
+function section(title){var s=make("section","pdf-section");s.append(make("h2","",title));$("printPaper").append(s);return s}
+function printValue(title,text){var s=section(title);s.append(make("div","value",text||"—"));return s}
+function buildPrint(){var root=$("printPaper");root.replaceChildren();root.append(make("h1","pdf-title",state.title||"Situació d'aprenentatge"),make("p","pdf-sub","ProgramApp · Colegio Nuestra Señora del Carmen — Barrio del Cristo"));
+var meta=make("div","pdf-meta");[["S.A. núm.",state.saNumber],["Etapa i curs",state.stage==="primaria"?state.grade+"º de Primària":state.grade+" anys d'Infantil"],["Àrees",state.areas.map(nameArea).join(" · ")],["ODS",state.ods],["Durada",state.duration],["Preg. desafiament",state.challenge]].forEach(function(p){var box=make("div","cell");box.append(make("b","",p[0]),make("span","",p[1]||"—"));meta.append(box)});root.append(meta);
+KINDS.forEach(function(kind){var sec=section(LABELS[kind]);if(!state.selected[kind].length){sec.append(make("div","pdf-empty","Sense elements seleccionats."));return}
+currentDB().area_order.forEach(function(area){var entries=state.selected[kind].map(getEntry).filter(function(e){return e&&e.area===area});if(!entries.length)return;sec.append(make("h3","",nameArea(area)));entries.forEach(function(e){var box=make("div","pdf-entry");box.append(make("div","pdf-text",(e.title?e.title+" · ":"")+e.text));if(e.detail)box.append(make("small","",e.scope?e.scope+" · "+e.detail:e.detail));if(e.warning)box.append(make("small","",e.warning));sec.append(box)})})});
+["metodologia","dua","inclusio"].forEach(function(key){printValue(CONFIG.find(function(c){return c.key===key}).label,currentText(key))});
+var evalSec=section("Instruments d'avaluació"),cols=make("div","pdf-cols");["instrument1","instrument2","instrument3"].forEach(function(k,i){var cell=make("div");cell.append(make("b","","Instrument "+(i+1)),make("p","",currentText(k)));cols.append(cell)});evalSec.append(cols);
+var tasksSec=section("Itinerari de tasques");state.tasks.forEach(function(t,i){var row=make("div","pdf-task");row.append(make("b","","Tasca "+(i+1)+(t.fase?" · "+t.fase:"")),make("div","value",t.descripcion||"—"));tasksSec.append(row)});
+printValue("Espais",currentText("espais"));printValue("Recursos",currentText("recursos"));printValue("Tipologia d'activitats d'aula transformadora",currentText("tipologia"))}
+function download(name,body,mime){var a=make("a");var url=URL.createObjectURL(new Blob([body],{type:mime}));a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},45000)}
+function resetEditor(){state=blank();$("kind").value="competencias";$("search").value="";limit=35;setFieldValue();buildAreas();buildAreaFilter();renderCatalog();renderSelected();document.getElementById("textControls").replaceChildren();document.getElementById("extraControls").replaceChildren();buildTextControls();renderTasks();persist()}
+function applyDraft(obj){state=normalizeDraft(obj);sanitizeSelected();setFieldValue();buildAreas();buildAreaFilter();renderCatalog();renderSelected();$("textControls").replaceChildren();$("extraControls").replaceChildren();buildTextControls();renderTasks();persist()}
+function bindEvents(){
+$("stage").addEventListener("change",function(){if(state.selected.competencias.length+state.selected.criterios.length+state.selected.saberes.length && !confirm("Al cambiar de etapa se eliminarán los elementos curriculares elegidos. ¿Continuar?")){$("stage").value=state.stage;return}
+state.stage=$("stage").value;state.grade=state.stage==="primaria"?"6":"5";state.areas=[];state.selected={competencias:[],criterios:[],saberes:[]};setFieldValue();buildAreas();buildAreaFilter();limit=35;renderCatalog();renderSelected();persist()});
+$("grade").addEventListener("change",function(){if(state.selected.competencias.length+state.selected.criterios.length+state.selected.saberes.length && !confirm("Cambiar el curso quitará los elementos seleccionados del curso anterior. ¿Continuar?")){$("grade").value=state.grade;return}state.grade=$("grade").value;state.selected={competencias:[],criterios:[],saberes:[]};limit=35;renderCatalog();renderSelected();persist()});
+var mapping={saNumber:"saNumber",saTitle:"title",duration:"duration",challenge:"challenge",ods:"ods"};
+Object.keys(mapping).forEach(function(id){$(id).addEventListener("input",function(){state[mapping[id]]=$(id).value;persist()})});
+["kind","areaFilter"].forEach(function(id){$(id).addEventListener("change",function(){limit=35;renderCatalog()})});
+$("search").addEventListener("input",function(){limit=35;renderCatalog()});
+$("showMore").addEventListener("click",function(){limit+=35;renderCatalog()});
+$("addTask").addEventListener("click",function(){state.tasks.push(newTask());renderTasks();persist()});
+$("exportDraft").addEventListener("click",function(){download("ProgramApp_"+(state.title||"situacion").replace(/[^\wÀ-ÿ-]/g,"_").slice(0,45)+".json",JSON.stringify(state,null,2),"application/json;charset=utf-8")});
+$("importDraft").addEventListener("click",function(){$("fileDraft").click()});
+$("fileDraft").addEventListener("change",async function(){var file=this.files&&this.files[0];if(!file)return;try{var obj=JSON.parse(await file.text());if(!obj||!obj.selected||!Array.isArray(obj.areas)||!["infantil","primaria"].includes(obj.stage))throw Error("Formato no válido");if(confirm("Se sustituirá el proyecto actual por el archivo seleccionado. ¿Continuar?"))applyDraft(obj)}catch(err){alert("No se ha podido abrir el proyecto: "+err.message)}finally{this.value=""}});
+$("reset").addEventListener("click",function(){if(confirm("¿Crear una situación nueva? Se sustituirán los datos guardados en este navegador."))resetEditor()});
+$("printPdf").addEventListener("click",function(){if(!state.title.trim()&&!confirm("No has puesto título. ¿Generar el PDF igualmente?"))return;buildPrint();window.print()})
+}
+async function init(){readStored();bindEvents();notify("Cargando currículo…");try{var responses=await Promise.all(["datos-primaria.json","datos-infantil.json"].map(function(url){return fetch(url,{cache:"no-store"}).then(function(r){if(!r.ok)throw Error(url+" ("+r.status+")");return r.json()})}));data.primaria=responses[0];data.infantil=responses[1];sanitizeSelected();setFieldValue();buildAreas();buildAreaFilter();buildTextControls();renderTasks();renderSelected();renderCatalog();notify("Guardado automático ✓")}catch(err){console.error(err);$("catalog").append(make("div","empty","Error al cargar los datos curriculares. Recarga la página y comprueba tu conexión."));notify("Error de carga")}}
+init();
+})();
+</script>
+</body></html>
