@@ -51,6 +51,27 @@ textarea{min-height:90px;resize:vertical;line-height:1.57}input::placeholder,tex
 #printPaper{display:none}
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.areas{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){main{padding:0 12px;margin-top:15px}.header-inner{padding:16px}.header h1{font-size:28px}.save-indicator{display:none}.card{padding:16px;border-radius:14px}.grid,.filters,.areas,.task-content{grid-template-columns:1fr}.field.wide{grid-column:1}.catalog-item{grid-template-columns:1fr}.catalog-item button{justify-self:start}.actions{flex-direction:column;align-items:stretch}.actions p{max-width:none}.action-buttons{display:grid;grid-template-columns:1fr 1fr}.btn{padding:9px}.mode-top select{width:100%}}
+
+/* Selector de los 17 Objetivos de Desarrollo Sostenible */
+.ods-picker{border:1px solid #bacbdf;border-radius:11px;background:#fff;overflow:hidden}
+.ods-picker summary{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;padding:12px 14px;font-weight:720;color:#244a72;list-style:none}
+.ods-picker summary::-webkit-details-marker{display:none}
+.ods-picker summary:after{content:"▾";font-size:18px;color:#3979b6;transition:transform .2s}
+.ods-picker[open] summary:after{transform:rotate(180deg)}
+.ods-picker[open] summary{border-bottom:1px solid #dce7f3;background:#f5f9ff}
+.ods-options{padding:11px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:400px;overflow-y:auto}
+.ods-option{border:1px solid #dce6ef;border-radius:11px;background:#fff;padding:10px;display:flex;align-items:flex-start;gap:9px;cursor:pointer}
+.ods-option:hover{border-color:#80a7d2}
+.ods-option:has(input:checked){border-color:#3880bc;background:#eef6ff}
+.ods-option input{margin:2px 0 0;flex:none;width:18px;height:18px;accent-color:#2366af}
+.ods-option b{display:block;font-size:13px;color:#183b60;line-height:1.35}
+.ods-option small{display:block;margin-top:3px;color:#6a7989;font-size:11px;line-height:1.35}
+.ods-tags{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 2px}
+.ods-chip{display:flex;gap:8px;align-items:center;border:1px solid #c2d9ed;border-radius:99px;padding:5px 7px 5px 11px;background:#eef7ff;color:#1a5078;font-size:12px;font-weight:700}
+.ods-chip button{border:0;border-radius:50%;width:21px;height:21px;line-height:19px;padding:0;background:#d2e6f7;color:#285779;font-weight:900}
+.ods-chip button:hover{background:#c2d8ec}
+@media(max-width:700px){.ods-options{grid-template-columns:1fr;max-height:330px}}
+
 @page{size:A4;margin:14mm 13mm}
 @media print{html,body{background:white!important;color:#152237!important;font:10pt/1.35 Arial,sans-serif!important}#screenApp{display:none!important}#printPaper{display:block!important;width:auto;margin:0;padding:0}.pdf-title{font-size:20pt;color:#14375d;font-weight:800;margin:0 0 6px}.pdf-sub{font-size:9pt;color:#5c6978;margin:0 0 16px}.pdf-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-bottom:13px}.pdf-meta .cell{border:1px solid #cad6e3;padding:6px 8px;min-width:0;overflow-wrap:anywhere;break-inside:avoid}.pdf-meta b{display:block;font-size:8pt;color:#406084;margin-bottom:2px}.pdf-section{margin:16px 0 0;break-inside:auto}.pdf-section h2{background:#e9f1f8;padding:7px 9px;font-size:11pt;color:#183e63;margin:0 0 8px;break-after:avoid}.pdf-section h3{font-size:10pt;margin:10px 0 5px;color:#254c70;break-after:avoid}.pdf-section .value{white-space:pre-line;overflow-wrap:anywhere;padding:2px 6px;font-size:9.5pt}.pdf-entry{padding:5px 7px;border-bottom:1px solid #e2e7ec;break-inside:avoid;overflow-wrap:anywhere}.pdf-entry .pdf-text{white-space:pre-line}.pdf-entry small{display:block;color:#53677d;margin-top:4px;font-size:8.3pt}.pdf-task{border-bottom:1px solid #dfe7ee;padding:8px;break-inside:avoid}.pdf-task b{display:block;color:#16456e;margin-bottom:3px}.pdf-empty{color:#808fa1;font-style:italic}.pdf-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.pdf-cols>div{border:1px solid #d8e0e9;padding:7px;white-space:pre-line;overflow-wrap:anywhere;break-inside:avoid}}
 </style>
@@ -70,7 +91,14 @@ textarea{min-height:90px;resize:vertical;line-height:1.57}input::placeholder,tex
 <div class="field wide"><label class="field-label" for="saTitle">Nombre de la situación de aprendizaje</label><input id="saTitle" type="text" placeholder="Escribe un título"></div>
 <div class="field"><label class="field-label" for="duration">Duración</label><input id="duration" type="text" placeholder="Ej. 6 setmanes"></div>
 <div class="field wide"><label class="field-label" for="challenge">Pregunta desafío / reto</label><input id="challenge" type="text" placeholder="¿Qué queremos descubrir o conseguir?"></div>
-<div class="field"><label class="field-label" for="ods">ODS</label><input id="ods" type="text" placeholder="Ej. 3, 4, 11"></div>
+<div class="field full"><span class="field-label" id="odsLabel">Objetivos de Desarrollo Sostenible (ODS)</span>
+<details class="ods-picker" id="odsPicker">
+<summary aria-labelledby="odsLabel odsSummary"><span id="odsSummary">Seleccionar ODS</span></summary>
+<div id="odsOptions" class="ods-options" role="group" aria-label="Elige uno o varios ODS"></div>
+</details>
+<div id="odsSelected" class="ods-tags" aria-live="polite"></div>
+<p class="help">Selecciona uno o varios objetivos. Puedes reconocerlos por su nombre y quitarlos cuando quieras. Aparecerán identificados en el PDF.</p>
+</div>
 </div></section>
 
 <section class="card">
@@ -123,6 +151,39 @@ var KEY="carmen-programapp-v1";
 var KINDS=["competencias","criterios","saberes"];
 var LABELS={competencias:"Competències específiques",criterios:"Criteris d'avaluació",saberes:"Sabers bàsics"};
 var FASES=["CONNECTA","RECERCA","REFLEXIONA","CREA","EXPOSA"];
+
+var ODS_LIST=[{"id":1,"name":"Fin de la pobreza","hint":"Eliminar la pobreza en todas sus formas."},{"id":2,"name":"Hambre cero","hint":"Erradicar el hambre y promover una alimentación adecuada."},{"id":3,"name":"Salud y bienestar","hint":"Vida saludable y bienestar para todas las personas."},{"id":4,"name":"Educación de calidad","hint":"Educación inclusiva, equitativa y de calidad."},{"id":5,"name":"Igualdad de género","hint":"Igualdad entre mujeres y hombres y empoderamiento."},{"id":6,"name":"Agua limpia y saneamiento","hint":"Acceso al agua y al saneamiento sostenible."},{"id":7,"name":"Energía asequible y no contaminante","hint":"Energía accesible, segura y sostenible."},{"id":8,"name":"Trabajo decente y crecimiento económico","hint":"Empleo digno y crecimiento económico sostenible."},{"id":9,"name":"Industria, innovación e infraestructura","hint":"Infraestructuras sostenibles e innovación."},{"id":10,"name":"Reducción de las desigualdades","hint":"Reducir desigualdades dentro de los países y entre ellos."},{"id":11,"name":"Ciudades y comunidades sostenibles","hint":"Entornos urbanos inclusivos, seguros y sostenibles."},{"id":12,"name":"Producción y consumo responsables","hint":"Utilización sostenible de recursos y consumo consciente."},{"id":13,"name":"Acción por el clima","hint":"Medidas para combatir el cambio climático."},{"id":14,"name":"Vida submarina","hint":"Conservar los mares, océanos y recursos marinos."},{"id":15,"name":"Vida de ecosistemas terrestres","hint":"Proteger la biodiversidad y los ecosistemas terrestres."},{"id":16,"name":"Paz, justicia e instituciones sólidas","hint":"Convivencia pacífica, justicia e instituciones responsables."},{"id":17,"name":"Alianzas para lograr los objetivos","hint":"Cooperación para alcanzar los Objetivos de Desarrollo Sostenible."}];
+function normalizeODS(value){
+ var raw=Array.isArray(value)?value:(String(value||"").match(/\d+/g)||[]);
+ var valid=raw.map(function(n){return Number(n)}).filter(function(n){return Number.isInteger(n)&&n>=1&&n<=17});
+ return Array.from(new Set(valid)).sort(function(a,b){return a-b});
+}
+function formatODS(){return state.ods.map(function(id){var x=ODS_LIST.find(function(o){return o.id===id});return x?"ODS "+x.id+" · "+x.name:""}).filter(Boolean).join(" · ")}
+function renderODS(){
+ var options=$("odsOptions"),chips=$("odsSelected");
+ if(!options||!chips)return;
+ options.replaceChildren();chips.replaceChildren();
+ ODS_LIST.forEach(function(o){
+  var label=make("label","ods-option"),cb=make("input"),holder=make("span"),title=make("b","","ODS "+o.id+" · "+o.name),hint=make("small","",o.hint);
+  cb.type="checkbox";cb.value=String(o.id);cb.checked=state.ods.includes(o.id);
+  cb.setAttribute("aria-label","ODS "+o.id+": "+o.name);
+  cb.addEventListener("change",function(){
+   if(cb.checked)state.ods.push(o.id);
+   else state.ods=state.ods.filter(function(n){return n!==o.id});
+   state.ods=normalizeODS(state.ods);renderODS();persist()
+  });
+  holder.append(title,hint);label.append(cb,holder);options.append(label)
+ });
+ $("odsSummary").textContent=state.ods.length?state.ods.length+" ODS seleccionados · Pulsa para editar":"Elegir entre los 17 ODS";
+ state.ods.forEach(function(id){
+  var ods=ODS_LIST.find(function(o){return o.id===id});if(!ods)return;
+  var chip=make("span","ods-chip","ODS "+id+" · "+ods.name),remove=make("button","","×");
+  remove.type="button";remove.title="Quitar "+ods.name;remove.setAttribute("aria-label","Quitar ODS "+id+" · "+ods.name);
+  remove.addEventListener("click",function(){state.ods=state.ods.filter(function(n){return n!==id});renderODS();persist()});
+  chip.append(remove);chips.append(chip)
+ });
+}
+
 var DEFAULTS={
 metodologia:"Es desenvolupa una varietat de metodologies adaptades a la naturalesa de l'activitat i les particularitats del grup, sempre des d'un enfocament competencial i integrador. S'alternen els grups cooperatius, el treball individual i la classe magistral, amb l'objectiu d'assegurar una formació i un creixement globalitzat. Sempre trabllant des d'un enfocament actiu. S'empra el llibre de text com a font de recursos i de consulta teòrica.",
 dua:"La SA es construeix des de la mirada de l'accessibilitat total. Es garanteix la participació de cadascun dels individus que formen el grup-classe mitjançant activitats amb rols variats, i amb materials adaptats a les particularitats de cadascun. S'utilitza la curiositat i la satisfacció per entendre el seu voltant com a motor de l'aprenentatge.",
@@ -146,14 +207,15 @@ var CONFIG=[
 {key:"tipologia",label:"Tipologia d'activitats d'aula transformadora",parent:"extraControls"}
 ];
 function newTask(){return {fase:"",descripcion:""}}
-function blank(){return {stage:"primaria",grade:"6",saNumber:"1",title:"",duration:"",challenge:"",ods:"",areas:[],selected:{competencias:[],criterios:[],saberes:[]},modes:{},custom:{},tasks:[newTask(),newTask(),newTask()]}}
+function blank(){return {stage:"primaria",grade:"6",saNumber:"1",title:"",duration:"",challenge:"",ods:[],areas:[],selected:{competencias:[],criterios:[],saberes:[]},modes:{},custom:{},tasks:[newTask(),newTask(),newTask()]}}
 var state=blank(),data={primaria:null,infantil:null},limit=35,saveTimer;
 function make(tag,cls,txt){var el=document.createElement(tag);if(cls)el.className=cls;if(txt!==undefined)el.textContent=String(txt);return el}
 function notify(txt){$("saveIndicator").textContent=txt}
 function persist(){clearTimeout(saveTimer);saveTimer=setTimeout(function(){try{localStorage.setItem(KEY,JSON.stringify(state));notify("Guardado automáticamente ✓")}catch(err){notify("No se pudo guardar")} },180)}
 function readStored(){try{var p=JSON.parse(localStorage.getItem(KEY));if(p && (p.stage==="primaria"||p.stage==="infantil")) state=normalizeDraft(p)}catch(err){}}
 function normalizeDraft(p){var fresh=blank();fresh.stage=p.stage==="infantil"?"infantil":"primaria";fresh.grade=String(p.grade|| (fresh.stage==="primaria"?"6":"5"));if(!((fresh.stage==="primaria"?["1","2","3","4","5","6"]:["3","4","5"]).includes(fresh.grade)))fresh.grade=fresh.stage==="primaria"?"6":"5";
-["saNumber","title","duration","challenge","ods"].forEach(function(k){fresh[k]=String(p[k]||"")});
+["saNumber","title","duration","challenge"].forEach(function(k){fresh[k]=String(p[k]||"")});
+fresh.ods=normalizeODS(p.ods);
 fresh.areas=Array.isArray(p.areas)?p.areas.filter(function(x){return typeof x==="string"}):[];
 KINDS.forEach(function(k){fresh.selected[k]=Array.isArray(p.selected&&p.selected[k])?p.selected[k].filter(function(x){return typeof x==="string"}):[]});
 CONFIG.forEach(function(c){fresh.modes[c.key]=p.modes&&p.modes[c.key]==="custom"?"custom":"default";fresh.custom[c.key]=String(p.custom&&p.custom[c.key]||"")});
@@ -166,8 +228,8 @@ function escapeNorm(t){return String(t||"").normalize("NFD").replace(/[\u0300-\u
 function keyOf(e){return e.id}
 function getEntry(id){return (currentDB().entries||[]).find(function(e){return e.id===id})}
 function setFieldValue(){ $("stage").value=state.stage; buildGrade(); $("grade").value=state.grade;
-var names={saNumber:"saNumber",saTitle:"title",duration:"duration",challenge:"challenge",ods:"ods"};
-Object.keys(names).forEach(function(id){$(id).value=state[names[id]]});
+var names={saNumber:"saNumber",saTitle:"title",duration:"duration",challenge:"challenge"};
+Object.keys(names).forEach(function(id){$(id).value=state[names[id]]});renderODS();
 }
 function buildGrade(){$("grade").replaceChildren();var grades=state.stage==="primaria"?["1","2","3","4","5","6"]:["3","4","5"];grades.forEach(function(g){var o=make("option","",state.stage==="primaria"?g+"º de Primaria":g+" años");o.value=g;$("grade").append(o)});}
 function sanitizeSelected(){var db=currentDB();var validAreas=new Set(Object.keys(db.areas));state.areas=state.areas.filter(function(a,i){return validAreas.has(a)&&state.areas.indexOf(a)===i});KINDS.forEach(function(k){var seen=new Set();state.selected[k]=state.selected[k].filter(function(id){var e=db.entries.find(function(entry){return entry.id===id});if(!e||e.kind!==k||!graded(e)||!state.areas.includes(e.area)||seen.has(id))return false;seen.add(id);return true})})}
@@ -217,7 +279,7 @@ left.append(la,select);right.append(lb,ta);row.append(left,right);card.append(he
 function section(title){var s=make("section","pdf-section");s.append(make("h2","",title));$("printPaper").append(s);return s}
 function printValue(title,text){var s=section(title);s.append(make("div","value",text||"—"));return s}
 function buildPrint(){var root=$("printPaper");root.replaceChildren();root.append(make("h1","pdf-title",state.title||"Situació d'aprenentatge"),make("p","pdf-sub","ProgramApp · Colegio Nuestra Señora del Carmen — Barrio del Cristo"));
-var meta=make("div","pdf-meta");[["S.A. núm.",state.saNumber],["Etapa i curs",state.stage==="primaria"?state.grade+"º de Primària":state.grade+" anys d'Infantil"],["Àrees",state.areas.map(nameArea).join(" · ")],["ODS",state.ods],["Durada",state.duration],["Preg. desafiament",state.challenge]].forEach(function(p){var box=make("div","cell");box.append(make("b","",p[0]),make("span","",p[1]||"—"));meta.append(box)});root.append(meta);
+var meta=make("div","pdf-meta");[["S.A. núm.",state.saNumber],["Etapa i curs",state.stage==="primaria"?state.grade+"º de Primària":state.grade+" anys d'Infantil"],["Àrees",state.areas.map(nameArea).join(" · ")],["ODS",formatODS()],["Durada",state.duration],["Preg. desafiament",state.challenge]].forEach(function(p){var box=make("div","cell");box.append(make("b","",p[0]),make("span","",p[1]||"—"));meta.append(box)});root.append(meta);
 KINDS.forEach(function(kind){var sec=section(LABELS[kind]);if(!state.selected[kind].length){sec.append(make("div","pdf-empty","Sense elements seleccionats."));return}
 currentDB().area_order.forEach(function(area){var entries=state.selected[kind].map(getEntry).filter(function(e){return e&&e.area===area});if(!entries.length)return;sec.append(make("h3","",nameArea(area)));entries.forEach(function(e){var box=make("div","pdf-entry");box.append(make("div","pdf-text",(e.title?e.title+" · ":"")+e.text));if(e.detail)box.append(make("small","",e.scope?e.scope+" · "+e.detail:e.detail));if(e.warning)box.append(make("small","",e.warning));sec.append(box)})})});
 ["metodologia","dua","inclusio"].forEach(function(key){printValue(CONFIG.find(function(c){return c.key===key}).label,currentText(key))});
@@ -231,7 +293,7 @@ function bindEvents(){
 $("stage").addEventListener("change",function(){if(state.selected.competencias.length+state.selected.criterios.length+state.selected.saberes.length && !confirm("Al cambiar de etapa se eliminarán los elementos curriculares elegidos. ¿Continuar?")){$("stage").value=state.stage;return}
 state.stage=$("stage").value;state.grade=state.stage==="primaria"?"6":"5";state.areas=[];state.selected={competencias:[],criterios:[],saberes:[]};setFieldValue();buildAreas();buildAreaFilter();limit=35;renderCatalog();renderSelected();persist()});
 $("grade").addEventListener("change",function(){if(state.selected.competencias.length+state.selected.criterios.length+state.selected.saberes.length && !confirm("Cambiar el curso quitará los elementos seleccionados del curso anterior. ¿Continuar?")){$("grade").value=state.grade;return}state.grade=$("grade").value;state.selected={competencias:[],criterios:[],saberes:[]};limit=35;renderCatalog();renderSelected();persist()});
-var mapping={saNumber:"saNumber",saTitle:"title",duration:"duration",challenge:"challenge",ods:"ods"};
+var mapping={saNumber:"saNumber",saTitle:"title",duration:"duration",challenge:"challenge"};
 Object.keys(mapping).forEach(function(id){$(id).addEventListener("input",function(){state[mapping[id]]=$(id).value;persist()})});
 ["kind","areaFilter"].forEach(function(id){$(id).addEventListener("change",function(){limit=35;renderCatalog()})});
 $("search").addEventListener("input",function(){limit=35;renderCatalog()});
