@@ -145,7 +145,49 @@ main{max-width:1240px}
 }
 
 @page{size:A4;margin:14mm 13mm}
-@media print{html,body{background:white!important;color:#152237!important;font:10pt/1.35 Arial,sans-serif!important}#screenApp{display:none!important}#printPaper{display:block!important;width:auto;margin:0;padding:0}.pdf-title{font-size:20pt;color:#14375d;font-weight:800;margin:0 0 6px}.pdf-sub{font-size:9pt;color:#5c6978;margin:0 0 16px}.pdf-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-bottom:13px}.pdf-meta .cell{border:1px solid #cad6e3;padding:6px 8px;min-width:0;overflow-wrap:anywhere;break-inside:avoid}.pdf-meta b{display:block;font-size:8pt;color:#406084;margin-bottom:2px}.pdf-section{margin:16px 0 0;break-inside:auto}.pdf-section h2{background:#e9f1f8;padding:7px 9px;font-size:11pt;color:#183e63;margin:0 0 8px;break-after:avoid}.pdf-section h3{font-size:10pt;margin:10px 0 5px;color:#254c70;break-after:avoid}.pdf-section .value{white-space:pre-line;overflow-wrap:anywhere;padding:2px 6px;font-size:9.5pt}.pdf-entry{padding:5px 7px;border-bottom:1px solid #e2e7ec;break-inside:avoid;overflow-wrap:anywhere}.pdf-entry .pdf-text{white-space:pre-line}.pdf-entry small{display:block;color:#53677d;margin-top:4px;font-size:8.3pt}.pdf-task{border-bottom:1px solid #dfe7ee;padding:8px;break-inside:avoid}.pdf-task b{display:block;color:#16456e;margin-bottom:3px}.pdf-empty{color:#808fa1;font-style:italic}.pdf-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.pdf-cols>div{border:1px solid #d8e0e9;padding:7px;white-space:pre-line;overflow-wrap:anywhere;break-inside:avoid}}
+
+@media print{
+  :root{color-scheme:light}
+  *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  html,body{background:#fff!important;color:#1d2a3a!important;font:9.4pt/1.42 Arial,Helvetica,sans-serif!important}
+  #screenApp{display:none!important}
+  #printPaper{display:block!important;width:auto;max-width:100%;margin:0;padding:0;counter-reset:pdfsection}
+  .pdf-header{background:#153858;color:#fff;border-left:8px solid #e69448;padding:15px 19px 16px;margin-bottom:12px;border-radius:0 7px 7px 0;break-inside:avoid}
+  .pdf-eyebrow{color:#cfe1f5;font-weight:700;font-size:8pt;text-transform:uppercase;letter-spacing:.13em;margin-bottom:5px}
+  .pdf-title{font-size:20pt;line-height:1.19;color:#fff;font-weight:800;margin:0 0 7px;overflow-wrap:anywhere}
+  .pdf-sub{font-size:8.3pt;color:#d8e5f5;margin:0}
+  .pdf-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px}
+  .pdf-meta .cell{background:#f5f8fc;border:1px solid #cbd9e8;border-left:4px solid #5e8fbc;border-radius:4px;padding:8px 10px;min-width:0;overflow-wrap:anywhere;break-inside:avoid}
+  .pdf-meta .cell:nth-child(3),.pdf-meta .cell:nth-child(4),.pdf-meta .cell:nth-child(6){grid-column:1/-1}
+  .pdf-meta b{display:block;font-size:7.7pt;color:#345f8d;margin:0 0 3px;text-transform:uppercase;letter-spacing:.02em}
+  .pdf-meta span{color:#243e59;font-weight:550;line-height:1.5}
+  .pdf-section{--pdf-accent:#265b9f;--pdf-soft:#ecf3fc;margin:16px 0 0;break-inside:auto}
+  .pdf-competencias{--pdf-accent:#235fa6;--pdf-soft:#eef5fe}
+  .pdf-criterios{--pdf-accent:#7250ac;--pdf-soft:#f4f0fc}
+  .pdf-saberes{--pdf-accent:#087f7c;--pdf-soft:#edf8f6}
+  .pdf-metodologia,.pdf-dua,.pdf-inclusio{--pdf-accent:#c06f2f;--pdf-soft:#fff6ec}
+  .pdf-evaluacion{--pdf-accent:#875e9a;--pdf-soft:#f7f1fb}
+  .pdf-tareas{--pdf-accent:#107c68;--pdf-soft:#eaf8f3}
+  .pdf-recursos{--pdf-accent:#516b8c;--pdf-soft:#eff3f9}
+  .pdf-section h2{display:flex;align-items:center;gap:10px;background:var(--pdf-accent);color:#fff;padding:9px 12px;border-radius:5px;font-size:11.3pt;line-height:1.28;margin:0 0 9px;font-weight:800;break-after:avoid;orphans:2;widows:2}
+  .pdf-section h2::before{counter-increment:pdfsection;content:counter(pdfsection, decimal-leading-zero);display:inline-block;flex:none;padding:3px 6px;border-radius:4px;background:#ffffff30;border:1px solid #ffffff59;color:white;font-size:8pt;font-weight:700;letter-spacing:.02em}
+  .pdf-section h3{color:var(--pdf-accent);background:var(--pdf-soft);border-left:5px solid var(--pdf-accent);font-size:9.8pt;line-height:1.3;margin:12px 0 7px;padding:7px 10px;border-radius:0 4px 4px 0;font-weight:800;break-after:avoid}
+  .pdf-section .value{background:#fbfcfe;border:1px solid #dfe6ef;border-left:3px solid var(--pdf-accent);border-radius:4px;white-space:pre-line;overflow-wrap:anywhere;padding:10px 12px;font-size:9.3pt;line-height:1.54}
+  .pdf-entry{padding:8px 11px;margin:5px 0;border:1px solid #dae3ed;border-left:4px solid var(--pdf-accent);background:#fff;border-radius:4px;overflow-wrap:anywhere;break-inside:avoid}
+  .pdf-entry:nth-of-type(even){background:var(--pdf-soft)}
+  .pdf-entry .pdf-text{white-space:pre-line;line-height:1.45;color:#1f334b}
+  .pdf-entry small{display:block;color:#506780;margin-top:6px;padding-top:5px;border-top:1px dashed #d1dce8;font-size:8.2pt;line-height:1.48}
+  .pdf-empty{color:#78889a;font-style:italic;background:#f8fafc;padding:9px 11px}
+  .pdf-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .pdf-cols>div{background:var(--pdf-soft);border:1px solid #e0d8e9;border-top:4px solid var(--pdf-accent);border-radius:4px;padding:10px;white-space:pre-line;overflow-wrap:anywhere;break-inside:avoid}
+  .pdf-cols b{color:var(--pdf-accent);font-size:9pt}
+  .pdf-cols p{margin:7px 0 0;line-height:1.5}
+  .pdf-task{border:1px solid #cfe6df;border-left:5px solid var(--pdf-accent);background:#f8fcfa;border-radius:5px;padding:10px 12px;margin:7px 0;break-inside:avoid}
+  .pdf-task:nth-of-type(even){background:#eaf8f4}
+  .pdf-task b{display:block;font-size:9.6pt;color:#0b6958;margin-bottom:4px}
+  .pdf-task .value{background:transparent;border:0;padding:0}
+  .pdf-section h2,.pdf-section h3,.pdf-entry,.pdf-task,.pdf-meta .cell{page-break-inside:avoid}
+}
 </style>
 </head>
 <body>
@@ -371,16 +413,57 @@ var empty=make("option","","Sin fase asignada");empty.value="";select.append(emp
 FASES.forEach(function(f){var o=make("option","",f);o.value=f;select.append(o)});select.value=t.fase||"";ta.value=t.descripcion||"";ta.placeholder="Describe qué hará el alumnado…";
 select.addEventListener("change",function(){t.fase=select.value;persist()});ta.addEventListener("input",function(){t.descripcion=ta.value;persist()});
 left.append(la,select);right.append(lb,ta);row.append(left,right);card.append(head,row);root.append(card)})}
-function section(title){var s=make("section","pdf-section");s.append(make("h2","",title));$("printPaper").append(s);return s}
-function printValue(title,text){var s=section(title);s.append(make("div","value",text||"—"));return s}
-function buildPrint(){var root=$("printPaper");root.replaceChildren();root.append(make("h1","pdf-title",state.title||"Situació d'aprenentatge"),make("p","pdf-sub","ProgramApp · Colegio Nuestra Señora del Carmen — Barrio del Cristo"));
-var meta=make("div","pdf-meta");[["S.A. núm.",state.saNumber],["Etapa i curs",state.stage==="primaria"?state.grade+"º de Primària":state.grade+" anys d'Infantil"],["Àrees",state.areas.map(nameArea).join(" · ")],["ODS",formatODS()],["Durada",state.duration],["Preg. desafiament",state.challenge]].forEach(function(p){var box=make("div","cell");box.append(make("b","",p[0]),make("span","",p[1]||"—"));meta.append(box)});root.append(meta);
-KINDS.forEach(function(kind){var sec=section(LABELS[kind]);if(!state.selected[kind].length){sec.append(make("div","pdf-empty","Sense elements seleccionats."));return}
-currentDB().area_order.forEach(function(area){var entries=state.selected[kind].map(getEntry).filter(function(e){return e&&e.area===area});if(!entries.length)return;sec.append(make("h3","",nameArea(area)));entries.forEach(function(e){var box=make("div","pdf-entry");box.append(make("div","pdf-text",(e.title?e.title+" · ":"")+e.text));if(e.detail)box.append(make("small","",e.scope?e.scope+" · "+e.detail:e.detail));if(e.warning)box.append(make("small","",e.warning));sec.append(box)})})});
-["metodologia","dua","inclusio"].forEach(function(key){printValue(CONFIG.find(function(c){return c.key===key}).label,currentText(key))});
-var evalSec=section("Instruments d'avaluació"),cols=make("div","pdf-cols");["instrument1","instrument2","instrument3"].forEach(function(k,i){var cell=make("div");cell.append(make("b","","Instrument "+(i+1)),make("p","",currentText(k)));cols.append(cell)});evalSec.append(cols);
-var tasksSec=section("Itinerari de tasques");state.tasks.forEach(function(t,i){var row=make("div","pdf-task");row.append(make("b","","Tasca "+(i+1)+(t.fase?" · "+t.fase:"")),make("div","value",t.descripcion||"—"));tasksSec.append(row)});
-printValue("Espais",currentText("espais"));printValue("Recursos",currentText("recursos"));printValue("Tipologia d'activitats d'aula transformadora",currentText("tipologia"))}
+function section(title,theme){var s=make("section","pdf-section"+(theme?" "+theme:""));s.append(make("h2","",title));$("printPaper").append(s);return s}
+function printValue(title,text,theme){var s=section(title,theme);s.append(make("div","value",text||"—"));return s}
+function buildPrint(){
+ var root=$("printPaper");root.replaceChildren();
+ var header=make("header","pdf-header");
+ header.append(make("div","pdf-eyebrow","PROGRAMAPP · SITUACIÓ D'APRENENTATGE"),
+               make("h1","pdf-title",state.title||"Situació d'aprenentatge"),
+               make("p","pdf-sub","Colegio Nuestra Señora del Carmen · Barrio del Cristo — Aldaia"));
+ root.append(header);
+ var meta=make("div","pdf-meta");
+ [["S.A. núm.",state.saNumber],
+  ["Etapa i curs",state.stage==="primaria"?state.grade+"º de Primària":state.grade+" anys d'Infantil"],
+  ["Àrees",state.areas.map(nameArea).join(" · ")],
+  ["ODS",formatODS()],
+  ["Durada",state.duration],
+  ["Pregunta desafiament",state.challenge]].forEach(function(pair){
+   var cell=make("div","cell");cell.append(make("b","",pair[0]),make("span","",pair[1]||"—"));meta.append(cell)
+  });root.append(meta);
+ KINDS.forEach(function(kind){
+  var sec=section(LABELS[kind],"pdf-"+kind);
+  if(!state.selected[kind].length){sec.append(make("div","pdf-empty","Sense elements seleccionats."));return}
+  currentDB().area_order.forEach(function(area){
+   var entries=state.selected[kind].map(getEntry).filter(function(e){return e&&e.area===area});
+   if(!entries.length)return;
+   sec.append(make("h3","","ÀREA · "+nameArea(area)+"  ("+entries.length+")"));
+   entries.forEach(function(e){
+    var box=make("div","pdf-entry");
+    box.append(make("div","pdf-text",(e.title?e.title+" · ":"")+e.text));
+    if(e.detail)box.append(make("small","",e.scope?e.scope+" · "+e.detail:e.detail));
+    if(e.warning)box.append(make("small","",e.warning));
+    sec.append(box)
+   })
+  })
+ });
+ ["metodologia","dua","inclusio"].forEach(function(key){
+  printValue(CONFIG.find(function(c){return c.key===key}).label,currentText(key),"pdf-"+key)
+ });
+ var evalSec=section("Instruments d'avaluació","pdf-evaluacion"),cols=make("div","pdf-cols");
+ ["instrument1","instrument2","instrument3"].forEach(function(k,i){
+  var cell=make("div");cell.append(make("b","","Instrument "+(i+1)),make("p","",currentText(k)));cols.append(cell)
+ });evalSec.append(cols);
+ var tasksSec=section("Itinerari de tasques","pdf-tareas");
+ state.tasks.forEach(function(t,i){
+  var row=make("div","pdf-task");
+  row.append(make("b","","Tasca "+(i+1)+(t.fase?" · "+t.fase:"")),make("div","value",t.descripcion||"—"));
+  tasksSec.append(row)
+ });
+ printValue("Espais",currentText("espais"),"pdf-recursos");
+ printValue("Recursos",currentText("recursos"),"pdf-recursos");
+ printValue("Tipologia d'activitats d'aula transformadora",currentText("tipologia"),"pdf-recursos")
+}
 function download(name,body,mime){var a=make("a");var url=URL.createObjectURL(new Blob([body],{type:mime}));a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},45000)}
 function resetEditor(){state=blank();$("kind").value="competencias";$("search").value="";limit=35;setFieldValue();buildAreas();buildAreaFilter();renderCatalog();renderSelected();document.getElementById("textControls").replaceChildren();document.getElementById("extraControls").replaceChildren();buildTextControls();renderTasks();persist()}
 function applyDraft(obj){state=normalizeDraft(obj);sanitizeSelected();setFieldValue();buildAreas();buildAreaFilter();renderCatalog();renderSelected();$("textControls").replaceChildren();$("extraControls").replaceChildren();buildTextControls();renderTasks();persist()}
