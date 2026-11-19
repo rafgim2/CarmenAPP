@@ -72,6 +72,78 @@ textarea{min-height:90px;resize:vertical;line-height:1.57}input::placeholder,tex
 .ods-chip button:hover{background:#c2d8ec}
 @media(max-width:700px){.ods-options{grid-template-columns:1fr;max-height:330px}}
 
+
+/* Diseño 2.0: jerarquía de colores por paso y selección curricular evidente */
+main{max-width:1240px}
+.card{--card-accent:#2765ad;--card-soft:#e8f1fc;position:relative;border:1px solid #d9e4f0;border-top:5px solid var(--card-accent);overflow:hidden;box-shadow:0 11px 35px rgba(26,57,94,.09);padding:26px 27px 27px;margin-bottom:22px}
+.card-general{--card-accent:#2765ad;--card-soft:#e8f1fc}
+.card-areas{--card-accent:#0d8a82;--card-soft:#e6f8f4}
+.card-catalog{--card-accent:#7549b4;--card-soft:#f2eaff}
+.card-selected{--card-accent:#215eb6;--card-soft:#e5efff;background:linear-gradient(125deg,#f0f6ff,#fff 70%);border:2px solid #9dbde8;border-top:6px solid #215eb6;box-shadow:0 14px 42px rgba(21,91,177,.15)}
+.card-method{--card-accent:#d47c35;--card-soft:#fff1e1}
+.card-tasks{--card-accent:#178273;--card-soft:#e5f7f0}
+.card-resources{--card-accent:#637891;--card-soft:#edf1f6}
+.card-head{padding:0 0 15px;margin-bottom:20px;border-bottom:1px solid #e2e9f2;gap:15px}
+.card-head .step{color:var(--card-accent);background:var(--card-soft);border:1px solid color-mix(in srgb,var(--card-accent) 20%,white);width:43px;height:43px;border-radius:12px;font-size:16px;box-shadow:0 2px 6px #162b4710}
+.card-head h2{font-size:23px;color:#193854;letter-spacing:-.03em}
+.card-head p{font-size:13px;color:#586f87;margin-top:5px}
+.card-selected .card-head h2{color:#1855a2}
+.card-selected .card-head p{color:#4a678b}
+.card input:not([type=checkbox]):not([type=file]):focus,.card select:focus,.card textarea:focus{border-color:var(--card-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--card-accent) 15%,white);outline:none}
+.card-areas .area-choice:has(input:checked){border-color:#1b9c8a;background:#e5f8f2;box-shadow:inset 4px 0 #1b9c8a}
+.catalog-item{border:1px solid #dee6f1;border-left:4px solid #d1dfef;background:#fff;transition:border-color .17s,background .17s,box-shadow .17s;position:relative}
+.catalog-item strong{color:#32557e}
+.catalog-item.selected{background:#e4f0ff!important;border:2px solid #2c70c3!important;border-left:7px solid #205eac!important;box-shadow:0 5px 15px rgba(30,91,167,.13)}
+.catalog-item.selected strong{color:#164d90}
+.catalog-item.selected p{color:#183b62;font-weight:550}
+.selected-flag{display:inline-flex;align-items:center;gap:5px;background:#205fad;color:white;padding:4px 9px;border-radius:6px;letter-spacing:.03em;font-size:10px;font-weight:900;margin-bottom:8px}
+.btn-select-on{background:#f8fbff!important;color:#15519a!important;border:1px solid #2472c2!important}
+.btn-select-on:hover{background:#fff2f2!important;color:#a42d48!important;border-color:#d99aa9!important}
+.selection-overview{display:flex;align-items:center;flex-wrap:wrap;gap:13px;background:linear-gradient(110deg,#194b92,#286dc0);color:#fff;border-radius:14px;padding:14px 16px;margin-bottom:20px}
+.overview-count{display:flex;align-items:center;gap:12px}
+.overview-count b{font-size:30px;letter-spacing:-.05em;line-height:1}
+.overview-count span{font-size:13px;font-weight:720;line-height:1.25;max-width:170px}
+.overview-breakdown{display:flex;flex-wrap:wrap;gap:7px;margin-left:auto}
+.overview-breakdown span{background:#fff2;border:1px solid #ffffff4a;border-radius:40px;font-size:11px;font-weight:750;padding:6px 9px}
+.kind-group{--kind-accent:#2269b1;--kind-soft:#edf5ff;border:1px solid #d7e3f2;border-radius:14px;background:#fff;margin-bottom:17px;padding:14px 16px 8px}
+.kind-group:last-child{border:1px solid #d7e3f2;margin-bottom:0}
+.kind-competencias{--kind-accent:#2465b2;--kind-soft:#eaf3ff}
+.kind-criterios{--kind-accent:#7451b0;--kind-soft:#f3edff}
+.kind-saberes{--kind-accent:#087d78;--kind-soft:#e9f9f5}
+.kind-group h3{display:flex;align-items:center;justify-content:space-between;gap:9px;background:var(--kind-accent);color:#fff;padding:11px 13px;border-radius:9px;font-size:15px;margin:-4px -6px 13px}
+.kind-group h3 .kind-total{font-size:12px;padding:3px 9px;background:#ffffff2d;border:1px solid #ffffff63;border-radius:30px}
+.area-selected{margin:12px 0;padding:12px;background:var(--kind-soft);border:1px solid color-mix(in srgb,var(--kind-accent) 28%,white);border-radius:11px}
+.area-selected h4{font-weight:850;color:var(--kind-accent);font-size:14px;margin:1px 0 11px;padding:0 0 9px;border-bottom:1px solid color-mix(in srgb,var(--kind-accent) 22%,white)}
+.selected-item{display:flex;align-items:flex-start;gap:13px;background:#fff;border:1px solid #d6e0ed;border-left:4px solid var(--kind-accent);border-radius:8px;margin:8px 0;padding:10px 12px}
+.selected-item:first-of-type{border:1px solid #d6e0ed;border-left:4px solid var(--kind-accent)}
+.selected-item p{max-height:145px;line-height:1.55;font-size:12.5px;color:#243b55}
+.selected-item .btn-danger{flex:none}
+.mode-panel{padding:15px 17px!important;margin-bottom:12px;border:1px solid #e0e6ed!important;border-left:4px solid #dfa364!important;border-radius:11px;background:#fffaf4}
+.mode-panel:last-child{margin-bottom:0}
+.mode-top{margin-bottom:12px}
+.mode-top label{color:#835326;font-size:14px}
+.mode-panel.is-custom{background:#f4faff;border-left-color:#246eba!important}
+.mode-panel.is-custom .mode-top label{color:#235889}
+.task{background:#f4fbf9;border-color:#cde6df;border-left:4px solid #268976;padding:16px}
+.task-head strong{color:#0d695b;font-size:15px}
+.card-resources .mode-panel{background:#f8fafd;border-left-color:#7186a0!important}
+.card-resources .mode-panel .mode-top label{color:#425c7e}
+.actions{border-top:4px solid #205fa8}
+@media(max-width:700px){
+.card{padding:16px 15px 18px;border-radius:14px;margin-bottom:15px}
+.card-head{gap:10px;margin-bottom:15px}
+.card-head .step{width:36px;height:36px;font-size:14px}
+.card-head h2{font-size:20px}
+.catalog-item.selected{border-left-width:5px!important}
+.selection-overview{padding:13px;gap:10px}
+.overview-breakdown{width:100%;margin-left:0}
+.kind-group{padding:11px 10px}
+.kind-group h3{margin:-3px -3px 12px;font-size:14px}
+.selected-item{flex-direction:column;gap:8px}
+.selected-item .btn-danger{align-self:flex-start}
+.mode-panel{padding:12px!important}
+}
+
 @page{size:A4;margin:14mm 13mm}
 @media print{html,body{background:white!important;color:#152237!important;font:10pt/1.35 Arial,sans-serif!important}#screenApp{display:none!important}#printPaper{display:block!important;width:auto;margin:0;padding:0}.pdf-title{font-size:20pt;color:#14375d;font-weight:800;margin:0 0 6px}.pdf-sub{font-size:9pt;color:#5c6978;margin:0 0 16px}.pdf-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-bottom:13px}.pdf-meta .cell{border:1px solid #cad6e3;padding:6px 8px;min-width:0;overflow-wrap:anywhere;break-inside:avoid}.pdf-meta b{display:block;font-size:8pt;color:#406084;margin-bottom:2px}.pdf-section{margin:16px 0 0;break-inside:auto}.pdf-section h2{background:#e9f1f8;padding:7px 9px;font-size:11pt;color:#183e63;margin:0 0 8px;break-after:avoid}.pdf-section h3{font-size:10pt;margin:10px 0 5px;color:#254c70;break-after:avoid}.pdf-section .value{white-space:pre-line;overflow-wrap:anywhere;padding:2px 6px;font-size:9.5pt}.pdf-entry{padding:5px 7px;border-bottom:1px solid #e2e7ec;break-inside:avoid;overflow-wrap:anywhere}.pdf-entry .pdf-text{white-space:pre-line}.pdf-entry small{display:block;color:#53677d;margin-top:4px;font-size:8.3pt}.pdf-task{border-bottom:1px solid #dfe7ee;padding:8px;break-inside:avoid}.pdf-task b{display:block;color:#16456e;margin-bottom:3px}.pdf-empty{color:#808fa1;font-style:italic}.pdf-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.pdf-cols>div{border:1px solid #d8e0e9;padding:7px;white-space:pre-line;overflow-wrap:anywhere;break-inside:avoid}}
 </style>
@@ -82,7 +154,7 @@ textarea{min-height:90px;resize:vertical;line-height:1.57}input::placeholder,tex
 <main>
 <p class="intro">Diseña una <strong>situación de aprendizaje interdisciplinar</strong> con el currículo que ya utilizas en Carmen APP. Selecciona varias áreas, elige competencias, criterios y saberes, personaliza la plantilla y genera un PDF.</p>
 
-<section class="card">
+<section class="card card-general">
 <div class="card-head"><span class="step">01</span><div><h2>Datos de la situación de aprendizaje</h2><p>Etapa, curso y datos generales de la plantilla.</p></div></div>
 <div class="grid">
 <div class="field"><label class="field-label" for="stage">Etapa</label><select id="stage"><option value="primaria">Educación Primaria</option><option value="infantil">Educación Infantil</option></select></div>
@@ -101,13 +173,13 @@ textarea{min-height:90px;resize:vertical;line-height:1.57}input::placeholder,tex
 </div>
 </div></section>
 
-<section class="card">
+<section class="card card-areas">
 <div class="card-head"><span class="step">02</span><div><h2>Áreas que intervienen</h2><p>Puedes marcar varias. El área quedará identificada en todos los elementos y en el PDF.</p></div></div>
 <div id="areaList" class="areas" aria-label="Áreas curriculares"></div>
 <p class="help">Al desmarcar un área, se retiran también de la situación los elementos curriculares seleccionados de esa área.</p>
 </section>
 
-<section class="card">
+<section class="card card-catalog">
 <div class="card-head"><span class="step">03</span><div><h2>Seleccionar currículo</h2><p>Textos tomados de las aplicaciones de Concreción curricular de Infantil y Primaria de Carmen APP.</p></div></div>
 <div class="filters">
 <div class="field"><label class="field-label" for="kind">Elemento curricular</label><select id="kind"><option value="competencias">Competencias específicas</option><option value="criterios">Criterios de evaluación</option><option value="saberes">Saberes básicos</option></select></div>
@@ -119,22 +191,22 @@ textarea{min-height:90px;resize:vertical;line-height:1.57}input::placeholder,tex
 <div class="toolbar"><button type="button" class="btn" id="showMore" hidden>Mostrar más resultados</button></div>
 </section>
 
-<section class="card">
-<div class="card-head"><span class="step">04</span><div><h2>Currículo seleccionado</h2><p>Puedes quitar cada elemento individualmente, sin modificar los demás.</p></div></div>
-<div id="selectedSummary"></div>
+<section class="card card-selected">
+<div class="card-head"><span class="step">04</span><div><h2>Currículo seleccionado</h2><p>Los elementos elegidos se muestran destacados y agrupados por tipo y área. Puedes quitar cualquiera.</p></div></div>
+<div id="selectedSummary" aria-live="polite" aria-atomic="false"></div>
 </section>
 
-<section class="card">
+<section class="card card-method">
 <div class="card-head"><span class="step">05</span><div><h2>Metodología, DUA, inclusión y evaluación</h2><p>En cada apartado elige conservar el texto de la plantilla o escribir tu propia versión.</p></div></div>
 <div id="textControls"></div>
 </section>
 
-<section class="card">
+<section class="card card-tasks">
 <div class="card-head"><span class="step">06</span><div><h2>Itinerari de tasques</h2><p>Empieza con tres tareas; añade, elimina y reordena las que necesites.</p></div></div>
 <div id="tasks"></div><button type="button" class="btn btn-primary" id="addTask">+ Añadir tarea</button>
 </section>
 
-<section class="card">
+<section class="card card-resources">
 <div class="card-head"><span class="step">07</span><div><h2>Espacios, recursos y aula transformadora</h2><p>Los textos predeterminados proceden de la plantilla Excel.</p></div></div>
 <div id="extraControls"></div>
 </section>
@@ -250,22 +322,45 @@ list.slice(0,limit).forEach(function(e){var chosen=state.selected[kind].includes
 body.append(area,make("p","",e.text||""));
 if(e.detail){var d=make("details"),s=make("summary","","Ver concreción por ciclo"),content=make("p","",e.detail);content.style.maxHeight="none";d.append(s,content);body.append(d)}
 if(e.warning){var warn=make("div","source",e.warning);body.append(warn)}
-var btn=make("button","btn btn-small"+(chosen?" btn-primary":""),chosen?"✓ Seleccionado":"+ Añadir");btn.type="button";btn.addEventListener("click",function(){if(chosen){state.selected[kind]=state.selected[kind].filter(function(id){return id!==e.id})}else{state.selected[kind].push(e.id)}renderCatalog();renderSelected();persist()});
+if(chosen)body.prepend(make("span","selected-flag","✓ YA INCLUIDO EN LA SA"));var btn=make("button","btn btn-small"+(chosen?" btn-select-on":""),chosen?"✓ Incluido · Quitar":"+ Añadir");btn.type="button";btn.addEventListener("click",function(){if(chosen){state.selected[kind]=state.selected[kind].filter(function(id){return id!==e.id})}else{state.selected[kind].push(e.id)}renderCatalog();renderSelected();persist()});
 article.append(body,btn);root.append(article)});
 $("showMore").hidden=list.length<=limit;$("showMore").textContent="Mostrar más ("+Math.min(35,list.length-limit)+" de "+(list.length-limit)+" restantes)"}
-function renderSelected(){var root=$("selectedSummary");root.replaceChildren();var count=KINDS.reduce(function(n,k){return n+state.selected[k].length},0);if(!count){root.append(make("div","empty","Todavía no has elegido competencias, criterios ni saberes."));return}
-KINDS.forEach(function(kind){if(!state.selected[kind].length)return;var section=make("section","kind-group"),h=make("h3","",LABELS[kind]+" · "+state.selected[kind].length);section.append(h);
-currentDB().area_order.forEach(function(area){var list=state.selected[kind].map(getEntry).filter(function(e){return e&&e.area===area});if(!list.length)return;
-var box=make("div","area-selected");box.append(make("h4","",nameArea(area)+" · "+list.length));
-list.forEach(function(e){var row=make("div","selected-item");row.append(make("p","",(e.title?e.title+" · ":"")+e.text));
-var remove=make("button","btn btn-small btn-danger","Quitar");remove.type="button";remove.setAttribute("aria-label","Quitar "+LABELS[kind]+" de "+nameArea(area));remove.addEventListener("click",function(){state.selected[kind]=state.selected[kind].filter(function(id){return id!==e.id});renderCatalog();renderSelected();persist()});row.append(remove);box.append(row)});
-section.append(box)});root.append(section)})}
+function renderSelected(){
+ var root=$("selectedSummary");root.replaceChildren();
+ var count=KINDS.reduce(function(n,k){return n+state.selected[k].length},0);
+ if(!count){root.append(make("div","empty","Todavía no has elegido competencias, criterios ni saberes. Cuando los añadas, aparecerán aquí resaltados por colores."));return}
+ var overview=make("div","selection-overview"),head=make("div","overview-count"),total=make("b","",count),label=make("span","","elementos incluidos en esta situación de aprendizaje");
+ head.append(total,label);
+ var breakdown=make("div","overview-breakdown");
+ KINDS.forEach(function(kind){
+  var countTag=make("span","",state.selected[kind].length+" "+({competencias:"competencias",criterios:"criterios",saberes:"saberes"}[kind]));breakdown.append(countTag)
+ });
+ overview.append(head,breakdown);root.append(overview);
+ KINDS.forEach(function(kind){
+  if(!state.selected[kind].length)return;
+  var section=make("section","kind-group kind-"+kind),h=make("h3","",LABELS[kind]),num=make("span","kind-total",state.selected[kind].length+" seleccionados");
+  h.append(num);section.append(h);
+  currentDB().area_order.forEach(function(area){
+   var list=state.selected[kind].map(getEntry).filter(function(e){return e&&e.area===area});if(!list.length)return;
+   var box=make("div","area-selected");box.append(make("h4","",nameArea(area)+" · "+list.length+" elementos"));
+   list.forEach(function(e){
+    var row=make("div","selected-item");row.append(make("p","",(e.title?e.title+" · ":"")+e.text));
+    var remove=make("button","btn btn-small btn-danger","Quitar");remove.type="button";
+    remove.setAttribute("aria-label","Quitar "+LABELS[kind]+" de "+nameArea(area));
+    remove.addEventListener("click",function(){
+     state.selected[kind]=state.selected[kind].filter(function(id){return id!==e.id});
+     renderCatalog();renderSelected();persist()
+    });row.append(remove);box.append(row)
+   });section.append(box)
+  });root.append(section)
+ })
+}
 function currentText(key){return state.modes[key]==="custom"?state.custom[key]:DEFAULTS[key]}
 function buildTextControls(){CONFIG.forEach(function(c){var panel=make("div","mode-panel"),top=make("div","mode-top"),label=make("label","",c.label),mode=make("select"),ta=make("textarea");
 label.htmlFor="text-"+c.key;mode.setAttribute("aria-label","Modo de "+c.label);
 [["default","Texto de la plantilla"],["custom","Personalizar"]].forEach(function(pair){var opt=make("option","",pair[1]);opt.value=pair[0];mode.append(opt)});
-mode.value=state.modes[c.key]||"default";ta.id="text-"+c.key;ta.value=currentText(c.key);ta.disabled=mode.value!=="custom";
-mode.addEventListener("change",function(){state.modes[c.key]=mode.value;if(mode.value==="custom"&&!state.custom[c.key])state.custom[c.key]=DEFAULTS[c.key];ta.value=currentText(c.key);ta.disabled=mode.value!=="custom";persist()});
+mode.value=state.modes[c.key]||"default";panel.classList.toggle("is-custom",mode.value==="custom");ta.id="text-"+c.key;ta.value=currentText(c.key);ta.disabled=mode.value!=="custom";
+mode.addEventListener("change",function(){panel.classList.toggle("is-custom",mode.value==="custom");state.modes[c.key]=mode.value;if(mode.value==="custom"&&!state.custom[c.key])state.custom[c.key]=DEFAULTS[c.key];ta.value=currentText(c.key);ta.disabled=mode.value!=="custom";persist()});
 ta.addEventListener("input",function(){state.custom[c.key]=ta.value;persist()});
 top.append(label,mode);panel.append(top,ta);$(c.parent).append(panel)})}
 function renderTasks(){var root=$("tasks");root.replaceChildren();if(!state.tasks.length)root.append(make("div","empty","Todavía no hay tareas. Pulsa «Añadir tarea»."));
